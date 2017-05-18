@@ -112,6 +112,14 @@ export const updateUserFail = error => ({
   error
 })
 
+export const panicButtonSuccess = () => ({
+  type: types.PANIC_SUCCESS
+})
+
+export const panicButtonFail = () => ({
+  type: types.PANIC_FAIL
+})
+
 const HTTP = 'http://grandma-care-server-prod.eu-central-1.elasticbeanstalk.com'
 
 export const fetchOneUser = (token,userId) => (
@@ -272,5 +280,19 @@ export const updateUser = (token, userID, newUser) => (
     .then((res) => res.json())
     .then((data) => dispatch(updateUserSuccess(data)))
     .catch(err => dispatch(updateUserFail(err)))
+  )
+)
+
+export const panic = (token,userID) => (
+  dispatch => (
+    fetch(`${HTTP}/users/${userID}/panic`, {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'token': token
+      }
+    }).then(() => dispatch(panicButtonSuccess()))
+      .catch(() => dispatch(panicButtonFail()))
   )
 )

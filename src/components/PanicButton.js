@@ -5,12 +5,12 @@ import { Fab, Icon } from 'native-base'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { updateSensor } from '../actions'
+import { panic } from '../actions'
 
 class PanicButton extends React.Component {
 
   render() {
-    const { updateSensor, token, userID } = this.props
+    const { panic, token, userID } = this.props
     return (
       <Fab
         active={false}
@@ -18,10 +18,7 @@ class PanicButton extends React.Component {
         position="bottomLeft"
         onPress={()=> {
           ToastAndroid.showWithGravity('You just pressed Panic Button !', ToastAndroid.SHORT, ToastAndroid.CENTER)
-          updateSensor({
-            token, userID,
-            x: 0, y: 0, z:0
-          })
+          panic(token,userID)
         }}>
         <Icon name="alert" android="md-alert" style={{fontSize:60}} />
       </Fab>
@@ -30,13 +27,13 @@ class PanicButton extends React.Component {
 }
 
 PanicButton.propTypes = {
-  updateSensor: PropTypes.func.isRequired,
+  panic: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
   userID: PropTypes.string.isRequired
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateSensor: (obj) => dispatch(updateSensor(obj))
+  panic: (token,userID) => dispatch(panic(token,userID))
 })
 
 export default connect(null, mapDispatchToProps)(PanicButton)
