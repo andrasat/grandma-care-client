@@ -18,8 +18,8 @@ export default intervalId = (userID,token,instance) => {
         instance.props.updateLocation(locUpdate)
         instance.props.fetchOneUser(instance.props.token,instance.props.userID)
       },
-      (error) => Alert.alert('Turn on GPS',JSON.stringify(error)),
-      {timeout: 7000}
+      (error) => Alert.alert('Location Error',JSON.stringify(error)),
+      {timeout: 3000}
     );
-  }, 3500);
+  }, 3000);
 }

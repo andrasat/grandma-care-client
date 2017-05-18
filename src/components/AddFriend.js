@@ -29,12 +29,13 @@ class AddFriend extends React.Component {
         addFriendDone()
       } else {
         ToastAndroid.showWithGravity('Add Friend Error', ToastAndroid.SHORT, ToastAndroid.CENTER)
+        addFriendDone()
       }
     }
   }
 
   render() {
-    const { _setModalAddFriendVisible, token, userID, addFriend } = this.props
+    const { _setModalAddFriendVisible, token, userID, addFriend, addFriendDone } = this.props
     const { friendEmail } = this.state
     const { height, width } = Dimensions.get('window')
     return (
@@ -53,7 +54,10 @@ class AddFriend extends React.Component {
         <Header>
           <Left>
             <Button light transparent iconLeft
-              onPress={()=> _setModalAddFriendVisible(false)}>
+              onPress={()=> {
+                addFriendDone()
+                _setModalAddFriendVisible(false)
+              }}>
               <Icon name="arrow-back" color="#FFF"/>
               <Text>Back</Text>
             </Button>

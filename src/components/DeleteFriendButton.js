@@ -18,6 +18,7 @@ class DeleteFriendButton extends React.Component {
         deleteFriendDone()
       } else {
         ToastAndroid.showWithGravity('Delete Failed', ToastAndroid.SHORT, ToastAndroid.CENTER)
+        deleteFriendDone()
       }
     }
   }
